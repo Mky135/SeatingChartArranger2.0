@@ -1,1 +1,1 @@
-SheatingChartArranger2.0
+SeatingChartArranger2.0
