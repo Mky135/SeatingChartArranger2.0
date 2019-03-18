@@ -6,8 +6,8 @@ import java.util.List;
 public class Table
 {
     int tableSize;
-    char groupChar;
-    ArrayList<Student> students;
+    private char groupChar;
+    private ArrayList<Student> students;
 
     Table(int tableSize, char groupChar)
     {
@@ -25,9 +25,34 @@ public class Table
         }
     }
 
-    @Override
-    public String toString()
+    public ArrayList<Student> getStudents()
     {
-      return String.valueOf(groupChar);
+        return students;
     }
+
+    public void setStudents(ArrayList<Student> students)
+    {
+        this.students = students;
+    }
+
+    public void addStudent(Student student)
+    {
+        this.students.add(student);
+    }
+
+    public void clearStudents()
+    {
+        this.students.clear();
+    }
+
+    public char getGroupID()
+    {
+        return groupChar;
+    }
+
+//    @Override
+//    public String toString()
+//    {
+//      return String.valueOf(groupChar);
+//    }
 }

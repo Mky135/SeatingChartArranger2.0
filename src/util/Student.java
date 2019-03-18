@@ -73,7 +73,8 @@ public class Student
         }
         if(tableGroup != '0')
         {
-            stringBuilder.append(" Group: ").append(tableGroup);
+//            stringBuilder.append(" Group: ").append(tableGroup);
+            stringBuilder.append(" ").append(tableGroup);
         }
         if(image != null)
         {
