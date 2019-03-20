@@ -3,15 +3,13 @@ package util;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
 public class StudentHandler
 {
-    ArrayList<Student> students = new ArrayList<>();
-    ArrayList<Table> tables = new ArrayList<>();
+    private ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<Table> tables = new ArrayList<>();
 
-    Point tableSize = new Point(4, 4);
+    private Point tableSize = new Point(4, 4);
 
     StudentHandler()
     {
@@ -19,15 +17,10 @@ public class StudentHandler
         addTables((int) tableSize.getX(), (int) tableSize.getY());
         addStudentsToTable();
 
-        for(int i = 0; i < tables.size(); i++)
-        {
-//            System.out.println(tables.get(i).getStudents());
-        }
-//        shuffle();
         shuffleWithTables();
     }
 
-    void renewAndShuffleStudents()
+    private void renewAndShuffleStudents()
     {
         tables.clear();
         addTables((int) tableSize.getX(), (int) tableSize.getY());
@@ -40,11 +33,9 @@ public class StudentHandler
     {
         Table[] oldTables = new Table[tables.size()];
 
-//        System.out.print("P: ");
         for(int i = 0; i < oldTables.length; i++)
         {
             oldTables[i] = tables.get(i);
-//            System.out.print(oldTables[i].getStudents() + ", ");
         }
 
         System.out.println();
@@ -73,8 +64,8 @@ public class StudentHandler
             System.out.println();
         }
 
-        Student a = null;
-        Student b = null;
+        Student a;
+        Student b;
 
         for(int i = 0; i < tables.size(); i++)
         {
@@ -84,8 +75,6 @@ public class StudentHandler
                 {
                     if(tables.get(i).getStudents().get(x).getName().equals(oldTables[i].getStudents().get(r).getName()))
                     {
-                        System.out.println(i + " loop: " +  x + " " + tables.get(i).getStudents().get(x) + " : " + r + " " + oldTables[i].getStudents().get(r));
-
                         boolean swapped = false;
                         for(int j = 0; j < tables.get(0).getStudents().size(); j++)
                         {
@@ -146,7 +135,6 @@ public class StudentHandler
 
     void swapStudent(Student a , Student b)
     {
-        System.out.println("Swaping " + a + " with " + b);
         Student temp = new Student("temp");
 
         temp.setStudent(a);
@@ -206,7 +194,6 @@ public class StudentHandler
             }
             tables.add(new Table(tableSize, c));
         }
-//        System.out.println(tables);
     }
 
     public static void main(String[] args)
