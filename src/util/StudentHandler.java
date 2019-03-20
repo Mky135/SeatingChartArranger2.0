@@ -3,6 +3,8 @@ package util;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class StudentHandler
 {
@@ -38,11 +40,11 @@ public class StudentHandler
     {
         Table[] oldTables = new Table[tables.size()];
 
-        System.out.print("P: ");
+//        System.out.print("P: ");
         for(int i = 0; i < oldTables.length; i++)
         {
             oldTables[i] = tables.get(i);
-            System.out.print(oldTables[i].getStudents() + ", ");
+//            System.out.print(oldTables[i].getStudents() + ", ");
         }
 
         System.out.println();
@@ -55,7 +57,12 @@ public class StudentHandler
         {
             System.out.print(oldTables[i].getStudents() + ", ");
         }
+        System.out.println();
 
+        for(int i = 0; i < tables.size(); i++)
+        {
+            System.out.print(tables.get(i).getStudents() + ", ");
+        }
         System.out.println();
 
         for(int i = 0; i < oldTables.length; i++)
@@ -66,57 +73,85 @@ public class StudentHandler
             System.out.println();
         }
 
+        Student a = null;
+        Student b = null;
+
         for(int i = 0; i < tables.size(); i++)
         {
             for(int x = 0; x < tables.get(i).getStudents().size(); x++)
             {
+                for(int r = 0; r < oldTables[i].getStudents().size(); r++)
+                {
+                    if(tables.get(i).getStudents().get(x).getName().equals(oldTables[i].getStudents().get(r).getName()))
+                    {
+                        System.out.println(i + " loop: " +  x + " " + tables.get(i).getStudents().get(x) + " : " + r + " " + oldTables[i].getStudents().get(r));
 
+                        boolean swapped = false;
+                        for(int j = 0; j < tables.get(0).getStudents().size(); j++)
+                        {
+                            for(int k = 0; k < oldTables.length; k++)
+                            {
+                                for(int l = 0; l < oldTables[j].getStudents().size(); l++)
+                                {
+                                    if(i < tables.size()-1)
+                                    {
+                                        if(tables.get(i + 1).getStudents().get(j).getName().equals(oldTables[k].getStudents().get(l).getName()))
+                                        {
+                                            if( oldTables[k].getStudents().get(l).getTableGroup() != tables.get(i).getGroupID())
+                                            {
+                                                a = tables.get(i + 1).getStudents().get(j);
+                                                b = tables.get(i).getStudents().get(x);
+                                                swapStudent(a, b);
+                                                swapped = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if(tables.get(0).getStudents().get(j).getName().equals(oldTables[k].getStudents().get(l).getName()))
+                                        {
+                                            if( oldTables[k].getStudents().get(l).getTableGroup() != tables.get(i).getGroupID())
+                                            {
+                                                a = tables.get(0).getStudents().get(j);
+                                                b = tables.get(i).getStudents().get(x);
+                                                swapStudent(a, b);
+                                                swapped = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                if(swapped)
+                                {
+                                    break;
+                                }
+                            }
+                            if(swapped)
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                }
             }
+        }
+
+        for(int i = 0; i < tables.size(); i++)
+        {
+            System.out.print(tables.get(i).getStudents());
         }
     }
 
-
-    void shuffle() //TODO: add tables to the shuffle
+    void swapStudent(Student a , Student b)
     {
-        Student[] prevStudent = new Student[students.size()];
+        System.out.println("Swaping " + a + " with " + b);
+        Student temp = new Student("temp");
 
-        renewAndShuffleStudents();
-
-        for(int i = 0; i < students.size(); i++)
-        {
-            System.out.print("P: " + prevStudent[i] + " ");
-        }
-
-        System.out.println();
-        System.out.println("A: " + students);
-
-        for(int i = 0; i < prevStudent.length; i++)
-        {
-            if(prevStudent[i].equals(students.get(i)) && i + 1 < prevStudent.length)
-            {
-//                System.out.println(students.get(i) + " was put in the same seat and was swapped with " + students.get(i+1));
-                Collections.swap(students, i, i + 1);
-                for(int x = 0; x < i; x++)
-                {
-                    if(prevStudent[i].equals(students.get(i)) && i + 1 < prevStudent.length)
-                    {
-//                        System.out.println(students.get(i) + " was put in the same seat and was swapped with " + students.get(i+1));
-                        Collections.swap(students, i, i + 1);
-                    }
-                    else if(prevStudent[i].equals(students.get(i)))
-                    {
-//                        System.out.println(students.get(i) + " was put in the same seat and was swapped with " + students.get(0));
-                        Collections.swap(students, i, 0);
-                    }
-                }
-            }
-            else if(prevStudent[i].equals(students.get(i)))
-            {
-//                System.out.println(students.get(i) + " was put in the same seat and was swapped with " + students.get(0));
-                Collections.swap(students, i, 0);
-            }
-        }
-        System.out.println("A: " + students);
+        temp.setStudent(a);
+        a.setStudent(b);
+        b.setStudent(temp);
     }
 
     void addStudentsToArray(ArrayList<Student> students, int limit)

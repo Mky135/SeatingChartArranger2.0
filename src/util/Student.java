@@ -61,6 +61,22 @@ public class Student
         this.tableGroup = tableGroup;
     }
 
+    public void setName(String name) { this.name = name; }
+
+    public String getName() { return name; }
+
+    public Point2D getSeat() { return seat; }
+
+    public Image getImage() { return image; }
+
+
+    public void setStudent(Student student)
+    {
+        this.name = student.getName();
+        this.seat = student.getSeat();
+        this.image = student.getImage();
+    }
+
     @Override
     public String toString()
     {
