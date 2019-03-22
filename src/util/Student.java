@@ -10,7 +10,7 @@ public class Student
     private String name;
     private Point2D seat;
     private Image image;
-    private Dimension2D maxImageSize = new Dimension2D(100, 100);
+    public static Dimension2D maxImageSize = new Dimension2D(100, 100);
 
     public Student(String name, Point2D seat, String image, char tableGroup)
     {
@@ -51,17 +51,19 @@ public class Student
         this(name, -1, -1, '0');
     }
 
-    public char getTableGroup()
-    {
-        return tableGroup;
-    }
-
     public void setTableGroup(char tableGroup)
     {
         this.tableGroup = tableGroup;
     }
 
+    public void setImage(Image image) { this.image = image; }
+
     public void setName(String name) { this.name = name; }
+
+    public char getTableGroup()
+    {
+        return tableGroup;
+    }
 
     public String getName() { return name; }
 

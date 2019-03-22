@@ -1,23 +1,28 @@
 package util;
 
+import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class StudentHandler
 {
-    private ArrayList<Student> students = new ArrayList<>();
+    public ArrayList<Student> students = new ArrayList<>();
     private ArrayList<Table> tables = new ArrayList<>();
 
-    private Point tableSize = new Point(4, 4);
+    public Point tableSize = new Point(4, 4);
 
-    StudentHandler()
+    public StudentHandler()
     {
         addStudentsToArray(students, 16);
         addTables((int) tableSize.getX(), (int) tableSize.getY());
         addStudentsToTable();
 
         shuffleWithTables();
+
+        addImagesToStudents();
     }
 
     private void renewAndShuffleStudents()
@@ -38,31 +43,7 @@ public class StudentHandler
             oldTables[i] = tables.get(i);
         }
 
-        System.out.println();
-
         renewAndShuffleStudents();
-
-        System.out.print("P: ");
-
-        for(int i = 0; i < oldTables.length; i++)
-        {
-            System.out.print(oldTables[i].getStudents() + ", ");
-        }
-        System.out.println();
-
-        for(int i = 0; i < tables.size(); i++)
-        {
-            System.out.print(tables.get(i).getStudents() + ", ");
-        }
-        System.out.println();
-
-        for(int i = 0; i < oldTables.length; i++)
-        {
-            System.out.print(oldTables[i].getGroupID() + ": ");
-            System.out.println("Old table: " + oldTables[i].getStudents());
-            System.out.println("New " + tables.get(i).getStudents());
-            System.out.println();
-        }
 
         Student a;
         Student b;
@@ -126,11 +107,6 @@ public class StudentHandler
                 }
             }
         }
-
-        for(int i = 0; i < tables.size(); i++)
-        {
-            System.out.print(tables.get(i).getStudents());
-        }
     }
 
     void swapStudent(Student a , Student b)
@@ -147,9 +123,21 @@ public class StudentHandler
         FileHandler fileHandler = new FileHandler("src/Names.txt");
         for(int i = 0; i < limit; i++)
         {
-            students.add(new Student(fileHandler.getLine(i)));
+            int x = 0;
+            int y = 0;
+
+            students.add(new Student(fileHandler.getLine(i), new Point2D(((x) * Student.maxImageSize.getWidth())+5, ((y)  * Student.maxImageSize.getHeight()) + 5), "/images/image" + i + ".jpeg", '0'));
         }
     }
+
+    void addImagesToStudents()
+    {
+        for(int i = 0; i < students.size(); i++)
+        {
+            students.get(i).setImage(new Image("/images/image" + i + ".jpeg"));
+        }
+    }
+
 
     void addStudentsToTable()
     {
