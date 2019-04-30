@@ -1,5 +1,9 @@
 package util;
 
+
+import javafx.geometry.Point2D;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +12,13 @@ public class Table
     int tableSize;
     private char groupChar;
     private ArrayList<Student> students;
+    private Point2D groupRange;
 
-    Table(int tableSize, char groupChar)
+    Table(int tableSize, char groupChar, Point2D groupRange)
     {
         this.tableSize = tableSize;
         this.groupChar = groupChar;
+        this.groupRange = groupRange;
         students = new ArrayList<>();
     }
 
@@ -48,6 +54,11 @@ public class Table
     public char getGroupID()
     {
         return groupChar;
+    }
+
+    public Point2D getGroupRange()
+    {
+        return groupRange;
     }
 
 //    @Override
